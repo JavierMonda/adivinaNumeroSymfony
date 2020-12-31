@@ -24,9 +24,19 @@ class MainController extends AbstractController
         $numero = $request->request->get('numero');
 
         if ($numero >= 1 && $numero <= 10000000000) {
-            echo "<script>setTimeout(function(){ window.location.href = '/'; }, 3000);</script>";
+            $digitos = strlen($numero);
+            $resultado = '';
+            for ($i=0;$i<$digitos;$i++) {
+                for ($c=0; $c<=9; $c++) {
+                    if ($c == $numero[$i]) {
+                        $resultado[$i] = $c;
+                    }           
+                }           
+            }
+            
+            echo "<script>setTimeout(function(){ window.location.href = '/'; }, 6000);</script>";
             return $this->render('resultado.html.twig', [
-                'numero' => $numero,
+                'resultado' => $resultado,
             ]);
         }
         return $this->render('error.html.twig');
